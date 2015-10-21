@@ -1,4 +1,4 @@
-# Python interface to Stanford Core NLP tools v3.5.5
+# Python interface to Stanford Core NLP tools v3.5.2
 
 This is a Python wrapper for Stanford University's NLP group's Java-based [CoreNLP tools](http://nlp.stanford.edu/software/corenlp.shtml).  It can either be imported as a module or run as a JSON-RPC server. Because it uses many large trained models (requiring 3GB RAM on 64-bit machines and usually a few minutes loading time), most applications will probably want to run it as a server.
 
@@ -17,7 +17,7 @@ It runs the Stanford CoreNLP jar in a separate process, communicates with the ja
 To use this program you must [download](http://nlp.stanford.edu/software/corenlp.shtml#Download) and unpack the compressed file containing Stanford's CoreNLP package.  By default, `corenlp.py` looks for the Stanford Core NLP folder as a subdirectory of where the script is being run.  In other words:
 
 	sudo pip install pexpect unidecode
-	git clone git://github.com/dasmith/stanford-corenlp-python.git
+	git clone https://github.com/adarshpugalia/E-Commerce-Rating-System.git
 	cd stanford-corenlp-python
 	wget http://nlp.stanford.edu/software/stanford-corenlp-full-2015-04-20.zip
 	unzip stanford-corenlp-full-2015-04-20.zip
