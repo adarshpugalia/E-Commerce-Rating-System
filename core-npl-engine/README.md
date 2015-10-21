@@ -18,7 +18,7 @@ To use this program you must [download](http://nlp.stanford.edu/software/corenlp
 
 	sudo pip install pexpect unidecode
 	git clone https://github.com/adarshpugalia/E-Commerce-Rating-System.git
-  cd core-nlp-engine/
+	cd core-nlp-engine
 
 Then launch the server:
 
