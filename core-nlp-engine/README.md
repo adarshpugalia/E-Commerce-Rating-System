@@ -118,11 +118,3 @@ The library supports [coreference resolution](http://en.wikipedia.org/wiki/Coref
   * 1 = The 2nd token, "world", is the [headword](http://en.wikipedia.org/wiki/Head_%28linguistics%29) of that sentence
   * 0 = 'Hello world' begins at the 0th token in the sentence
   * 2 = 'Hello world' ends before the 2nd token in the sentence.
-
-
-## Questions
-
-**Stanford CoreNLP tools require a large amount of free memory**.  Java 5+ uses about 50% more RAM on 64-bit machines than 32-bit machines.  32-bit machine users can lower the memory requirements by changing `-Xmx3g` to `-Xmx2g` or even less.
-If pexpect timesout while loading models, check to make sure you have enough memory and can run the server alone without your kernel killing the java process:
-
-	java -cp stanford-corenlp-2015-04-200.jar:stanford-corenlp-3.5.2-models.jar:xom.jar:joda-time.jar -Xmx3g edu.stanford.nlp.pipeline.StanfordCoreNLP -props default.properties
