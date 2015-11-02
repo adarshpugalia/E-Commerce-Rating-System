@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 #
 # corenlp  - Python interface to Stanford Core NLP tools
-# Copyright (c) 2015 Abhay Gupta
+# Copyright (c) 2014 Dustin Smith
+#   https://github.com/dasmith/stanford-corenlp-python
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -133,10 +134,8 @@ class StanfordCoreNLP(object):
         """
         jars = ["stanford-corenlp-3.5.2.jar",
                 "stanford-corenlp-3.5.2-models.jar",
-                "stanford-corenlp-3.5.2-sources.jar",
                 "joda-time.jar",
                 "xom.jar",
-                "xom-1.2.10-src.jar",
                 "jollyday.jar"]
 
         # if CoreNLP libraries are in a different directory,
