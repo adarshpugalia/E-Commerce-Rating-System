@@ -1,4 +1,4 @@
-# Python interface to Stanford Core NLP tools v3.4.1
+# Python interface to Stanford Core NLP tools v3.5.2
 
 This is a Python wrapper for Stanford University's NLP group's Java-based [CoreNLP tools](http://nlp.stanford.edu/software/corenlp.shtml).  It can either be imported as a module or run as a JSON-RPC server. Because it uses many large trained models (requiring 3GB RAM on 64-bit machines and usually a few minutes loading time), most applications will probably want to run it as a server.
 
@@ -10,7 +10,7 @@ This is a Python wrapper for Stanford University's NLP group's Java-based [CoreN
 
 It depends on [pexpect](http://www.noah.org/wiki/pexpect) and includes and uses code from [jsonrpc](http://www.simple-is-better.org/rpc/) and [python-progressbar](http://code.google.com/p/python-progressbar/).
 
-It runs the Stanford CoreNLP jar in a separate process, communicates with the java process using its command-line interface, and makes assumptions about the output of the parser in order to parse it into a Python dict object and transfer it using JSON.  The parser will break if the output changes significantly, but it has been tested on **Core NLP tools version 3.4.1** released 2014-08-27.
+It runs the Stanford CoreNLP jar in a separate process, communicates with the java process using its command-line interface, and makes assumptions about the output of the parser in order to parse it into a Python dict object and transfer it using JSON.  The parser will break if the output changes significantly, but it has been tested on **Core NLP tools version 3.5.2** released 2015-04-20.
 
 ## Download and Usage
 
@@ -19,8 +19,8 @@ To use this program you must [download](http://nlp.stanford.edu/software/corenlp
 	sudo pip install pexpect unidecode
 	git clone git://github.com/dasmith/stanford-corenlp-python.git
 	cd stanford-corenlp-python
-	wget http://nlp.stanford.edu/software/stanford-corenlp-full-2014-08-27.zip
-	unzip stanford-corenlp-full-2014-08-27.zip
+	wget http://nlp.stanford.edu/software/stanford-corenlp-full-2015-04-20.zip
+	unzip stanford-corenlp-full-2015-04-20.zip
 
 Then launch the server:
 
