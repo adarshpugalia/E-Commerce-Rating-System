@@ -11,5 +11,5 @@ class StanfordNLP:
         return json.loads(self.server.parse(text))
 
 nlp = StanfordNLP()
-result = nlp.parse("Hello world!  It is so beautiful.")
+result = nlp.parse("Hello world!  Today is so beautiful.")
 pprint(result)
