@@ -1,21 +1,26 @@
 import nltk
 from nltk.corpus import stopwords
+from nltk.tag.stanford import StanfordPOSTagger, StanfordNERTagger
 
 class StopWords(object):
     def __init__(self):
-        pass
+        self.textList = []
+        self.stop = stopwords.words('english')
+        self.addList1 = ['again', 'between', 'above', 'below', 'over', 'under', 'further', 'all', 'any', 'both']
+        self.addList2 = ['few', 'more', 'most', 'some', 'no', 'nor', 'not', 'same', 'very', 'too', 'each']
+        self.stop = list(set(self.stop) - set(self.addList1))
+        self.stop = list(set(self.stop) - set(self.addList2))
 
     def clean_sentence(self, text):
-        textList = []
-        stop = stopwords.words('english')
-        addList1 = ['again', 'between', 'above', 'below', 'over', 'under', 'further', 'all', 'any', 'both', 'each', 'few', 'more', 'most', 'some', 'no', 'nor', 'not', 'same']
-        addList2 = ['very', 'too']
-        stop = list(set(stop) - set(addList1))
-        stop = list(set(stop) - set(addList2))
+        """
+        input format: 'this is a sentence. this is another one.'
+        output format: cleaned sentence
+            e.g.: 'this sentence. this another one.'
+        """
         for word in text.split():
-            if word not in stop:
-                textList.append(word)
-        return ' '.join(textList)
+            if word not in self.stop:
+                self.textList.append(word)
+        return ' '.join(self.textList)
 
 class Splitter(object):
     def __init__(self):
@@ -35,19 +40,54 @@ class Splitter(object):
 
 class POSTagger(object):
     def __init__(self):
-        pass
+        self.postagger = StanfordPOSTagger('./postagger/models/english-bidirectional-distsim.tagger', './postagger/stanford-postagger.jar')
 
     def pos_tag(self, sentences):
         """
         input format: list of lists of words
-            e.g.: [['this', 'is', 'a', 'sentence'], ['this', 'is', 'another', 'one']]
+            e.g.: [['this', 'sentence'], ['this', another', 'one']]
         output format: list of lists of tagged tokens. Each tagged tokens has a
-        form, a lemma, and a list of tags
-            e.g: [[('this', 'this', ['DT']), ('is', 'be', ['VB']), ('a', 'a', ['DT']), ('sentence', 'sentence', ['NN'])],
-                    [('this', 'this', ['DT']), ('is', 'be', ['VB']), ('another', 'another', ['DT']), ('one', 'one', ['CARD'])]]
+        form, and a list of tags
+            e.g: [[(u'This', u'DT'), (u'sentence', u'NN'), (u'.', u'.')],
+                    [(u'This', u'DT'), (u'another', u'DT'), (u'one', u'CD'), (u'.', u'.')]]
         """
 
-        pos = [nltk.pos_tag(sentence) for sentence in sentences]
-        #adapt format
-        pos = [[(word, word, [postag]) for (word, postag) in sentence] for sentence in pos]
+        pos = [self.postagger.tag(sentence) for sentence in sentences]
         return pos
+
+class NERTagger(object):
+    def __init__(self):
+        self.nertagger = StanfordNERTagger('./nertagger/classifiers/english.muc.7class.distsim.crf.ser.gz', './nertagger/stanford-ner.jar')
+
+    def ner_tag(self, sentences):
+        """
+        input format: list of lists of words
+            e.g.: [['this', 'sentence'], ['this', 'another', 'one']]
+        output format: list of lists of tagged tokens. Each tagged tokens has a
+        form, a lemma, and a list of tags
+            e.g: [[(u'This', u'O'), (u'sentence', u'O'), (u'.', u'O')],
+                    [(u'This', u'O'), (u'another', u'O'), (u'one', u'O'), (u'.', u'O')]]
+        """
+
+        ner = [self.nertagger.tag(sentence) for sentence in sentences]
+        return ner
+
+def main():
+    text = "This is a sentence. This is another one."
+    # remove stop words
+    stopWordsObj = StopWords()
+    stopRemoved = stopWordsObj.clean_sentence(text)
+    # get tokenized setence
+    splitterObj = Splitter()
+    tokenized_sentences = splitterObj.split(stopRemoved)
+    # get the Part of Speech Tag
+    posTaggerObj = POSTagger()
+    pos = posTaggerObj.pos_tag(tokenized_sentences)
+    print pos
+    # get the Named Entity
+    nerTaggerObj = NERTagger()
+    ner = nerTaggerObj.ner_tag(tokenized_sentences)
+    print ner
+
+if __name__ == "__main__":
+    main()
