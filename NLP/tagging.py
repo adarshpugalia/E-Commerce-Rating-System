@@ -83,11 +83,9 @@ def main():
     # get the Part of Speech Tag
     posTaggerObj = POSTagger()
     pos = posTaggerObj.pos_tag(tokenized_sentences)
-    print pos
     # get the Named Entity
     nerTaggerObj = NERTagger()
     ner = nerTaggerObj.ner_tag(tokenized_sentences)
-    print ner
 
 if __name__ == "__main__":
     main()
